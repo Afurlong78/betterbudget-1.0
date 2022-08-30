@@ -197,13 +197,10 @@ export const MobileIcon = styled.button`
   display: none;
   border: none;
   color: #292929;
-  font-size: 2.5rem;
 
   background: transparent;
 
-  height: 50px;
-  width: 50px;
-
+  font-size: 3rem;
   margin-right: 30px;
 
   z-index: 100;

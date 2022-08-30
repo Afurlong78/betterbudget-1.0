@@ -2,7 +2,7 @@ const router = require("express").Router();
 const verify = require("../middleware/verifyJWT");
 const Budget = require("../model/Budgets");
 const User = require("../model/User");
-const { budgetValidation } = require("../validation");
+const { budgetValidation } = require("../Validation/validation");
 
 //useffect getting budget
 router.get("/budget", verify, async (req, res) => {

@@ -2,7 +2,7 @@ const router = require("express").Router();
 const verify = require("../middleware/verifyJWT");
 const Expense = require("../model/Expenses");
 const User = require("../model/User");
-const { expenseValidation } = require('../validation')
+const { expenseValidation } = require('../Validation/validation')
 
 router.get("/expense", verify, async (req, res) => {
   const foundExpenses = await Expense.find({ user: req.headers.user });

@@ -3,7 +3,7 @@ const User = require("../model/User");
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
 const verify = require("../middleware/verifyJWT");
-const { registerValidation } = require("../validation");
+const { registerValidation } = require("../Validation/validation");
 
 router.put("/update", verify, async (req, res) => {
   const user = await User.findOne({ email: req.body.email });

@@ -3,7 +3,7 @@ const User = require("../model/User");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
-const { registerValidation, loginValidation } = require("../validation");
+const { registerValidation, loginValidation } = require("../Validation/validation");
 
 //api/user/register
 // router.post("/register", async (req, res) => {
