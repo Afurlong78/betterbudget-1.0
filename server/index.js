@@ -39,4 +39,8 @@ app.use("/api/posts", passwordRecoveryRoute);
 app.use("/api/posts", passwordUpdate);
 app.use("/api/user", confirmation);
 
-app.listen(5000, () => console.log("Express server is running."));
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 5000;
+}
+app.listen(port, () => console.log("Express server is running."));
