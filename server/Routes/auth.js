@@ -3,7 +3,10 @@ const User = require("../model/User");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
-const { registerValidation, loginValidation } = require("../Validation/validation");
+const {
+  registerValidation,
+  loginValidation,
+} = require("../Validation/validation");
 
 //api/user/register
 // router.post("/register", async (req, res) => {
@@ -64,7 +67,7 @@ router.post("/register", async (req, res) => {
       { expiresIn: "1d" }
     );
 
-    const url = `http://localhost:5000/api/user/confirmation/${emailToken}`;
+    const url = `https://bb-server-production.up.railway.app/api/user/confirmation/${emailToken}`;
 
     const transporter = nodemailer.createTransport({
       service: "gmail",

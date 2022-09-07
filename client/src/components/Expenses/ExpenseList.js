@@ -28,10 +28,12 @@ import {
 import Styled from "../Global/GlobalStyles";
 
 function Expenses() {
-  const month_url = "http://localhost:5000/api/posts/month";
+  const month_url =
+    "https://bb-server-production.up.railway.app/api/posts/month";
   const storedToken = localStorage.getItem("token");
   const user = localStorage.getItem("user");
   const [monthCategory, setMonthCategory] = useState("January");
+  const [error, setError] = useState(false);
 
   const { budget } = useBudget();
 
@@ -63,11 +65,11 @@ function Expenses() {
       )
       .then((response) => {
         setMonthError("");
-        console.log(response);
+        // console.log(response);
       })
       .catch((err) => {
-        setMonthError(err.response.data.data);
         console.log(err);
+        setMonthError(err.response.data.data);
       });
   };
 
@@ -94,9 +96,11 @@ function Expenses() {
       )
       .then((response) => {
         setMonthError("");
-        console.log(response);
+        // console.log(response);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err, "error");
+      });
   };
 
   return (
@@ -132,9 +136,9 @@ function Expenses() {
             </ExpenseBtnRow>
           </ExpenseHeaderText>
           {!monthError ? (
-            <Styled.Error></Styled.Error>
+            <Styled.ErrorStart></Styled.ErrorStart>
           ) : (
-            <Styled.Error>{monthError}</Styled.Error>
+            <Styled.ErrorStart>{monthError}</Styled.ErrorStart>
           )}
         </Styled.Column>
         <ExpensesListed className="">

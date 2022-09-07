@@ -9,7 +9,8 @@ export const useBudget = () => {
 
 export function BudgetProvider({ children }) {
   //links and local storage
-  const budget_url = "http://localhost:5000/api/posts/budget";
+  const budget_url =
+    "https://bb-server-production.up.railway.app/api/posts/budget";
   const storedToken = localStorage.getItem("token");
   const user = localStorage.getItem("user");
 
@@ -19,27 +20,6 @@ export function BudgetProvider({ children }) {
 
   //error handling
   const [updateBudgetError, setUpdateBudgetError] = useState("");
-
-  //getting data on page load
-  useEffect(() => {
-    axios
-      .get(budget_url, {
-        headers: {
-          ["Authorization"]: storedToken,
-          ["user"]: user,
-        },
-      })
-      .then((response) => {
-        if (response.data.success === false) {
-          setBudget(0);
-        } else {
-          setBudget(response.data.budget);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   //budget functionality
   const budgetHandler = async (e) => {
@@ -61,7 +41,7 @@ export function BudgetProvider({ children }) {
       )
       .then(function (response) {
         setBudget(response.data.budget);
-        console.log(response);
+        // console.log(response);
       })
       .catch(function (error) {
         console.log(error, "error");

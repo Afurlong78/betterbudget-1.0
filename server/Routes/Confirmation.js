@@ -17,7 +17,7 @@ router.get("/confirmation/:token", async (req, res) => {
       { _id: foundUser._id },
       { $set: { activatedUser: true } }
     );
-    res.redirect("http://localhost:3000/login");
+    res.redirect("https://better-budget-smoky.vercel.app/login");
   } catch (err) {
     console.log(err);
   }

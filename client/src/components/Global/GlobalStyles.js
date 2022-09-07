@@ -1,6 +1,4 @@
-import styled from "styled-components";
-import { keyframes } from "styled-components";
-import bg from '../../Assets/bg.jpg';
+import styled, { keyframes } from "styled-components";
 
 const MainContent = styled.div`
   height: 100%;
@@ -127,7 +125,7 @@ export const Column = styled.div`
   // margin-bottom: 40px;
 `;
 
-export const Error = styled.p`
+export const Error = styled.div`
   color: red;
   font-family: "Poppins", sans-serif;
 
@@ -136,6 +134,32 @@ export const Error = styled.p`
 
   display: flex;
   justify-content: center;
+  align-items: center;
+
+  font-size: 0.7rem;
+`;
+export const ErrorStart = styled.p`
+  color: red;
+  font-family: "Poppins", sans-serif;
+
+  height: 0.7rem;
+  width: 100%;
+
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  font-size: 0.7rem;
+`;
+export const ErrorEnd = styled.p`
+  color: red;
+  font-family: "Poppins", sans-serif;
+
+  height: 0.7rem;
+  width: 100%;
+
+  display: flex;
+  justify-content: end;
   align-items: center;
 
   font-size: 0.7rem;
@@ -489,6 +513,94 @@ export const CloseSuccessfulRegistry = styled.button`
   }
 `;
 
+//----------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------------//
+export const SpinnerContainer = styled.div`
+  height: 200px;
+  width: 200px;
+
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+
+  position: relative;
+`;
+
+const redSpinnerAnimation = keyframes`
+    0%{
+        transform: rotate(0);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+`;
+
+export const RedSpinner = styled.div`
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 15px solid transparent;
+
+  border-left-color: #ff8196;
+
+  animation: ${redSpinnerAnimation} 3s ease-in-out infinite;
+
+  z-index: 11;
+`;
+
+const blueSpinnerAnimation = keyframes`
+    0%{
+        transform: rotate(0);
+    }
+    100%{
+        transform: rotate(-360deg);
+    }
+`;
+
+export const BlueSpinner = styled.div`
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 15px solid transparent;
+
+  border-top-color: #8fa9ff;
+
+  animation: ${blueSpinnerAnimation} 2s ease-out infinite;
+`;
+
+const greenSpinnerAnimation = keyframes`
+    0%{
+        transform: rotate(0);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+`;
+
+export const GreenSpinner = styled.div`
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 15px solid transparent;
+
+  border-right-color: #a8ffd1;
+
+  animation: ${greenSpinnerAnimation} 1.5s ease-in infinite;
+`;
+
 const Styled = {
   MainContent,
   Canvas,
@@ -500,6 +612,8 @@ const Styled = {
   GlobalRow,
   Column,
   Error,
+  ErrorEnd,
+  ErrorStart,
   FormIconColumn,
   FormIcon,
   FormCategoryText,
@@ -516,6 +630,10 @@ const Styled = {
   SuccessTextContainer,
   CloseSuccessfulRegistry,
   SuccessHeaderText,
+  GreenSpinner,
+  BlueSpinner,
+  RedSpinner,
+  SpinnerContainer
 };
 
 export default Styled;

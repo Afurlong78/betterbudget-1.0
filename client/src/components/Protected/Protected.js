@@ -6,7 +6,7 @@ import { LockedBG, Container, Shade, TextContainer } from "./Styles";
 import WallPaper from "../Global/WallPaper";
 
 function Protected() {
-  const url = "http://localhost:5000/api/posts";
+  const url = "https://bb-server-production.up.railway.app/api/posts";
 
   const storedToken = localStorage.getItem("token");
 

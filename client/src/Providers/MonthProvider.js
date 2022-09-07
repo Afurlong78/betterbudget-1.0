@@ -8,8 +8,9 @@ export const useMonth = () => {
 };
 
 export function MonthProvider({ children }) {
-  const month_url = "http://localhost:5000/api/posts/month";
-  const all_months_url = "http://localhost:5000/api/posts/all_months";
+  const month_url =
+    "https://bb-server-production.up.railway.app/api/posts/month";
+  // const all_months_url = "https://bb-server-production.up.railway.app/api/posts/all_months";
   const storedToken = localStorage.getItem("token");
   const user = localStorage.getItem("user");
 
@@ -18,6 +19,8 @@ export function MonthProvider({ children }) {
 
   //error handling
   const [monthError, setMonthError] = useState("");
+  const [monthStartError, setMonthStartError] = useState("");
+  const [monthEndError, setMonthEndError] = useState("");
 
   //state for charts - start
   const [startMonth, setStartMonth] = useState("");
@@ -89,7 +92,8 @@ export function MonthProvider({ children }) {
         },
       })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
+        setMonthStartError("");
         setStartMonth(response.data.data.month);
         setMonthStartBudget(response.data.data.budget);
         setMonthStartEntertainment(response.data.data.entertainment);
@@ -99,6 +103,7 @@ export function MonthProvider({ children }) {
       })
       .catch((err) => {
         console.log(err);
+        setMonthStartError(err.response.data.message);
       });
   };
 
@@ -113,7 +118,8 @@ export function MonthProvider({ children }) {
         },
       })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
+        setMonthEndError("");
         setEndMonth(response.data.data.month);
         setMonthEndBudget(response.data.data.budget);
         setMonthEndEntertainment(response.data.data.entertainment);
@@ -123,6 +129,7 @@ export function MonthProvider({ children }) {
       })
       .catch((err) => {
         console.log(err);
+        setMonthEndError(err.response.data.message);
       });
   };
 
@@ -158,7 +165,9 @@ export function MonthProvider({ children }) {
     setMonthStartBudget,
     setMonthEndBudget,
     setStartMonth,
-    setEndMonth
+    setEndMonth,
+    monthEndError,
+    monthStartError,
   };
   return (
     <MonthContext.Provider value={month_state}>

@@ -14,7 +14,7 @@ export const MainColumn = styled.div`
 `;
 
 export const MainContainer = styled.div`
-  height: 500px;
+  height: 520px;
   width: 100%;
 
   display: flex;
@@ -75,7 +75,7 @@ export const ColumnStart = styled.div`
   align-items: start;
 `;
 
-export const Row = styled.h2`
+export const Row = styled.div`
   height: 50px;
   width: 450px;
 
@@ -125,6 +125,11 @@ export const ColumnEnd = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: end;
+
+  @media all and (max-width: 700px) {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const RowEnd = styled.h2`
@@ -141,7 +146,7 @@ export const RowEnd = styled.h2`
   justify-content: space-between;
   align-items: center;
 
-  @media all and (max-width: 450px) {
+  @media all and (max-width: 550px) {
     height: 100%;
     width: 100%;
   }

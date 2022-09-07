@@ -19,7 +19,8 @@ import { BiErrorCircle } from "react-icons/bi";
 
 function UpdatePassword() {
   const storedToken = localStorage.getItem("token");
-  const update_url = "http://localhost:5000/api/posts/update";
+  const update_url =
+    "https://bb-server-production.up.railway.app/api/posts/update";
 
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
@@ -55,7 +56,7 @@ function UpdatePassword() {
           }
         )
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           setUserPassword("");
           setConfirmPassword("");
           setUserEmail("");
@@ -81,7 +82,7 @@ function UpdatePassword() {
           }
 
           if (err?.includes("password")) {
-            console.log("the password is the erorr.");
+            // console.log("the password is the erorr.");
             setPasswordError(err);
             setConfirmPasswordError(err);
             setEmailError("");

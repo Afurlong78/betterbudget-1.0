@@ -15,9 +15,10 @@ function ExpenseItem({ item, expense, category, _id }) {
   const user = localStorage.getItem("user");
 
   //links and local storage
-  const expense_url = "http://localhost:5000/api/posts/expense";
+  const expense_url =
+    "https://bb-server-production.up.railway.app/api/posts/expense";
 
-  const { expenses, setExpenses, setSum, sum } = useExpense();
+  const { setExpenses, setSum } = useExpense();
 
   const deleteHandler = async (e) => {
     e.preventDefault();

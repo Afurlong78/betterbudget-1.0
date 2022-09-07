@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { useMonth } from "../../Providers/MonthProvider";
 import StartMonth from "./StartMonth";
 import EndMonth from "./EndMonth";
 import { currencyFormatter } from "../../utils";
-import { MdOutlineCompare } from "react-icons/md";
 import {
   MainContainer,
   Row,
@@ -23,15 +22,17 @@ import {
   ComparisonColumnEnd,
   ComparisonRow,
   ComparisonItem,
-  ComparisonTotals,
   TotalsColumn,
   TotalsHeader,
   TotalsItem,
 } from "./Styles";
+import Styled from "../Global/GlobalStyles";
 
 function Comparisons() {
-  const month_url = "http://localhost:5000/api/posts/month";
-  const all_months_url = "http://localhost:5000/api/posts/all_months";
+  const month_url =
+    "https://bb-server-production.up.railway.app/api/posts/month";
+  const all_months_url =
+    "https://bb-server-production.up.railway.app/api/posts/all_months";
   const storedToken = localStorage.getItem("token");
   const user = localStorage.getItem("user");
 
@@ -40,8 +41,6 @@ function Comparisons() {
     getMonthStart,
     setMonthStart,
     setMonthEnd,
-    monthStart,
-    monthEnd,
     monthStartBills,
     monthStartBudget,
     monthStartEntertainment,
@@ -66,6 +65,8 @@ function Comparisons() {
     setMonthEndOther,
     setStartMonth,
     setEndMonth,
+    monthStartError,
+    monthEndError,
   } = useMonth();
 
   useEffect(() => {
@@ -210,54 +211,68 @@ function Comparisons() {
             </TotalsColumn>
           </ComparisonRow>
         </ComparisonBoard>
-        
-        <ColumnStart className="">
-          <Row>
-            <GetMonthBtn onClick={getMonthStart}>Start Month</GetMonthBtn>
-            <ComparisonDropDown
-              className=""
-              onChange={(e) => setMonthStart(e.target.value)}
-            >
-              <option value="January">January</option>
-              <option value="February">February</option>
-              <option value="March">March</option>
-              <option value="April">April</option>
-              <option value="May">May</option>
-              <option value="June">June</option>
-              <option value="July">July</option>
-              <option value="August">August</option>
-              <option value="September">September</option>
-              <option value="October">October</option>
-              <option value="November">November</option>
-              <option value="December">December</option>
-            </ComparisonDropDown>
-          </Row>
-          <ContentContainerStart className="">
-            <StartMonth />
-          </ContentContainerStart>
-        </ColumnStart>
 
         <ColumnEnd className="">
-          <RowEnd>
-            <GetMonthBtn onClick={getMonthEnd}>End Month</GetMonthBtn>
-            <ComparisonDropDown
-              className=""
-              onChange={(e) => setMonthEnd(e.target.value)}
-            >
-              <option value="January">January</option>
-              <option value="February">February</option>
-              <option value="March">March</option>
-              <option value="April">April</option>
-              <option value="May">May</option>
-              <option value="June">June</option>
-              <option value="July">July</option>
-              <option value="August">August</option>
-              <option value="September">September</option>
-              <option value="October">October</option>
-              <option value="November">November</option>
-              <option value="December">December</option>
-            </ComparisonDropDown>
-          </RowEnd>
+          <Styled.Column>
+            <RowEnd>
+              <GetMonthBtn onClick={getMonthStart}>Start Month</GetMonthBtn>
+              <ComparisonDropDown
+                className=""
+                onChange={(e) => setMonthStart(e.target.value)}
+              >
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+              </ComparisonDropDown>
+            </RowEnd>
+            {monthStartError ? (
+              <Styled.Error>{monthStartError}</Styled.Error>
+            ) : (
+              <Styled.Error></Styled.Error>
+            )}
+          </Styled.Column>
+          <ContentContainerEnd className="">
+            <StartMonth />
+          </ContentContainerEnd>
+        </ColumnEnd>
+
+        <ColumnEnd className="">
+          <Styled.Column>
+            <RowEnd>
+              <GetMonthBtn onClick={getMonthEnd}>End Month</GetMonthBtn>
+              <ComparisonDropDown
+                className=""
+                onChange={(e) => setMonthEnd(e.target.value)}
+              >
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+              </ComparisonDropDown>
+            </RowEnd>
+            {monthEndError ? (
+              <Styled.Error>{monthEndError}</Styled.Error>
+            ) : (
+              <Styled.Error></Styled.Error>
+            )}
+          </Styled.Column>
           <ContentContainerEnd className="">
             <EndMonth />
           </ContentContainerEnd>

@@ -9,7 +9,7 @@ export const useExpense = () => {
 
 export function ExpenseProvider({ children }) {
   //links and local storage
-  const expense_url = "http://localhost:5000/api/posts/expense";
+  const expense_url = "https://bb-server-production.up.railway.app/api/posts/expense";
   const storedToken = localStorage.getItem("token");
   const user = localStorage.getItem("user");
 

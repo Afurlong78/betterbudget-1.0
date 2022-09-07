@@ -8,7 +8,7 @@ export const usePassword = () => {
 };
 
 export function PasswordProvider({ children }) {
-  const recover_url = "http://localhost:5000/api/posts/password-recovery";
+  const recover_url = "https://bb-server-production.up.railway.app/api/posts/password-recovery";
 
   const storedToken = localStorage.getItem("token");
   const [userEmail, setUserEmail] = useState("");
@@ -77,7 +77,7 @@ export function PasswordProvider({ children }) {
         pass += arr[i];
       }
       setNewPassword(pass);
-      console.log(newPassword);
+      // console.log(newPassword);
     };
     generatePassword(scrambledCharSet);
 
@@ -87,7 +87,7 @@ export function PasswordProvider({ children }) {
         password: newPassword,
       })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setEmailError("");
         setSubmitted(false);
       })

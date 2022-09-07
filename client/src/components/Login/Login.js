@@ -13,7 +13,7 @@ import {
 import { BiLockOpen } from "react-icons/bi";
 
 function Login() {
-  const url = "http://localhost:5000/api/user/login";
+  const url = "https://bb-server-production.up.railway.app/api/user/login";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,6 +21,7 @@ function Login() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -28,6 +29,7 @@ function Login() {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    setLoading(true);
 
     axios
       .post(url, {
@@ -35,6 +37,7 @@ function Login() {
         password: password,
       })
       .then(function (response) {
+        setLoading(false);
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", response.data.id);
         if (response.data.success === true) {
@@ -43,6 +46,7 @@ function Login() {
         }
       })
       .catch(function (error) {
+        setLoading(false);
         setError(
           "Email or Password does not match. Please make sure that you have registered your account and that you have entered the proper credentials."
         );
@@ -56,6 +60,14 @@ function Login() {
   return (
     <Styled.Canvas>
       <WallPaper />
+      <Styled.SuccessfulRegistryContainer status={loading}>
+        <Styled.SpinnerContainer>
+          Logging in...
+          <Styled.RedSpinner />
+          <Styled.BlueSpinner />
+          <Styled.GreenSpinner />
+        </Styled.SpinnerContainer>
+      </Styled.SuccessfulRegistryContainer>
       <Styled.FormContainer className="shadow" onSubmit={submitHandler}>
         <Styled.FormIconColumn>
           <Styled.FormIcon>

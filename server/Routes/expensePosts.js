@@ -2,7 +2,7 @@ const router = require("express").Router();
 const verify = require("../middleware/verifyJWT");
 const Expense = require("../model/Expenses");
 const User = require("../model/User");
-const { expenseValidation } = require('../Validation/validation')
+const { expenseValidation } = require("../Validation/validation");
 
 router.get("/expense", verify, async (req, res) => {
   const foundExpenses = await Expense.find({ user: req.headers.user });
@@ -18,7 +18,10 @@ router.get("/expense", verify, async (req, res) => {
 router.post("/expense", verify, async (req, res) => {
   //need to validate expense
   const { error } = expenseValidation(req.body);
-  if(error) return res.status(400).json({success:false, data: error.details[0].message})
+  if (error)
+    return res
+      .status(400)
+      .json({ success: false, data: error.details[0].message });
 
   const expense = new Expense({
     expense: req.body.expense,

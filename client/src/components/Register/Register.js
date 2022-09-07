@@ -9,7 +9,7 @@ import WallPaper from "../Global/WallPaper";
 import { FormBtnRow, FormTextContainer } from "./Styles";
 
 function Register() {
-  const url = "http://localhost:5000/api/user/register";
+  const url = "https://bb-server-production.up.railway.app/api/user/register";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,6 +20,7 @@ function Register() {
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
   const [successfulRegistry, setSuccessfulResgistry] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -29,6 +30,7 @@ function Register() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     if (password === confirmPassword) {
       axios
@@ -37,26 +39,28 @@ function Register() {
           password: password,
         })
         .then(function (response) {
-          console.log(response);
+          // console.log(response);
           // navigate("/login");
+          setLoading(false);
           setSuccessfulResgistry(true);
 
           setEmailError("");
           setPasswordError("");
         })
         .catch(function (error) {
-          // console.log(error, "error");
+          console.log(error, "error");
+          setLoading(false);
 
           let err = error.response.data;
           console.log(err);
 
           if (err.includes("email")) {
-            console.log("the email is the error.");
+            // console.log("the email is the error.");
             setEmailError(err);
             setPasswordError("");
           }
           if (err.includes("password")) {
-            console.log("the password is the erorr.");
+            // console.log("the password is the erorr.");
             setPasswordError(err);
             setEmailError("");
           }
@@ -83,8 +87,17 @@ function Register() {
           You have successfully registered an account with BetterBudget. You
           should be recieving an email to confirm that you have registered.
           Please click the link provieded in the email to confirm your account
-          email and being butdgeting!
+          email and begin budgeting!
         </Styled.SuccessTextContainer>
+      </Styled.SuccessfulRegistryContainer>
+
+      <Styled.SuccessfulRegistryContainer status={loading}>
+        <Styled.SpinnerContainer>
+          Registering...
+          <Styled.RedSpinner />
+          <Styled.BlueSpinner />
+          <Styled.GreenSpinner />
+        </Styled.SpinnerContainer>
       </Styled.SuccessfulRegistryContainer>
       <Styled.FormContainer className="shadow" onSubmit={submitHandler}>
         <Styled.FormIconColumn>

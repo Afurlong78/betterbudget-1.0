@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Styled from "../Global/GlobalStyles";
 import axios from "axios";
 import ExpenseList from "../Expenses/ExpenseList";
 import { currencyFormatter } from "../../utils";
 import Comparisons from "../Comparisons/Comparisons";
-import Chart from "../DoughnutChart/Chart";
 import { useBudget } from "../../Providers/BudgetProvider";
 import { useExpense } from "../../Providers/ExpenseProvider";
-
 import {
   BudgetContainer,
   BudgetRow,
@@ -28,12 +26,14 @@ import {
 
 function Budget() {
   //links and local storage
-  const budget_url = "http://localhost:5000/api/posts/budget";
+  const budget_url =
+    "https://bb-server-production.up.railway.app/api/posts/budget";
   const storedToken = localStorage.getItem("token");
   const user = localStorage.getItem("user");
 
   //links and local storage
-  const expense_url = "http://localhost:5000/api/posts/expense";
+  const expense_url =
+    "https://bb-server-production.up.railway.app/api/posts/expense";
 
   const {
     budget,
@@ -46,20 +46,16 @@ function Budget() {
   } = useBudget();
 
   const {
-    expenses,
     expensesInput,
-    expenseCategory,
     sum,
     expenseHandler,
     setExpensesInput,
     setExpenses,
     setExpenseCategory,
     setSum,
-    deleteHandler,
     submitExpenseError,
   } = useExpense();
 
-  //getting budget data on page load
   useEffect(() => {
     axios
       .get(budget_url, {
@@ -75,10 +71,11 @@ function Budget() {
           setBudget(response.data.budget);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err)
+      });
   }, []);
 
-  //getting expense data on page load
   useEffect(() => {
     axios
       .get(expense_url, {
@@ -88,7 +85,6 @@ function Budget() {
         },
       })
       .then((response) => {
-        //sum expenses
         let sum = 0;
         for (let i = 0; i < response.data.length; i++) {
           sum += response.data[i].expense;
@@ -97,7 +93,9 @@ function Budget() {
         setExpenses(response.data);
         setSum(sum);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err)
+      });
   }, []);
 
   let remainder = budget - sum;
@@ -126,9 +124,9 @@ function Budget() {
       <SetBudgetRow className="mt-5">
         <Styled.Column>
           {!updateBudgetError ? (
-            <Styled.Error></Styled.Error>
+            <Styled.ErrorStart></Styled.ErrorStart>
           ) : (
-            <Styled.Error>{updateBudgetError}</Styled.Error>
+            <Styled.ErrorStart>{updateBudgetError}</Styled.ErrorStart>
           )}
           <Styled.RowStart className="">
             <BudgetInput
@@ -150,9 +148,9 @@ function Budget() {
 
         <Styled.Column>
           {!submitExpenseError ? (
-            <Styled.Error></Styled.Error>
+            <Styled.ErrorEnd></Styled.ErrorEnd>
           ) : (
-            <Styled.Error>{submitExpenseError}</Styled.Error>
+            <Styled.ErrorEnd>{submitExpenseError}</Styled.ErrorEnd>
           )}
           <Styled.RowEnd className="">
             <ExpensesInput

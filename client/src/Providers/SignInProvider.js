@@ -8,7 +8,7 @@ export const useSignIn = () => {
 };
 
 export function SignInProvider({ children }) {
-  const url = "http://localhost:5000/api/user/login";
+  const url = "https://bb-server-production.up.railway.app/api/user/login";
   let token = localStorage.getItem("token");
 
   const [email, setEmail] = useState("");
@@ -23,7 +23,7 @@ export function SignInProvider({ children }) {
     localStorage.removeItem("user");
 
     setLoginStatus(false);
-    console.log("clicked");
+    // console.log("clicked");
   };
 
   const sign_in = {

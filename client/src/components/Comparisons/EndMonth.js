@@ -7,7 +7,6 @@ import { Chart as chartjs } from "chart.js/auto";
 function EndMonth() {
   const {
     monthEndBills,
-    monthEndBudget,
     monthEndEntertainment,
     monthEndGroceries,
     monthEndOther,
