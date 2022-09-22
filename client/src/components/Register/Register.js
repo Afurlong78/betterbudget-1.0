@@ -84,8 +84,8 @@ function Register() {
           <Styled.SuccessHeaderText>
             Congratulations! <GiPartyPopper className="ms-3" />
           </Styled.SuccessHeaderText>
-          You have successfully registered an account with BetterBudget. You
-          should be recieving an email to confirm that you have registered.
+          You have successfully registered an account with BetterBudget. 
+          Close this tab and go to your email to confirm account creation.
           Please click the link provieded in the email to confirm your account
           email and begin budgeting!
         </Styled.SuccessTextContainer>
