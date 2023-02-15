@@ -39,7 +39,7 @@ function PasswordRecovery() {
           <Styled.FormInputContainer className="">
             {!submitted ? (
               <AnnoyingTextContainer className="">
-                Please enter your email below and a new password wil sent to
+                Please enter your email below and a new password will be sent to
                 you. Once you get your new password and login, use the
                 navigatation tool to locate the Update link to create a new
                 password for yourself.
